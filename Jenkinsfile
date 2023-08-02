@@ -2,6 +2,9 @@ pipeline {
     agent any
 
     stages {
+        stage('Preparation'){
+            bat 'python --version'
+        }
         stage('Build') {
             steps {
                 echo 'Building..'
