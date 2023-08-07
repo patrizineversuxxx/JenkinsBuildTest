@@ -4,14 +4,14 @@ pipeline {
     stages {
         stage('Preparation'){
             steps{
-                bat 'python --version'
+                sh 'python --version'
             }
 
         }
         stage('Build') {
             steps {
                 echo 'Building..'
-                bat 'python main.py'
+                sh 'python main.py'
             }
         }
         stage('Test') {
