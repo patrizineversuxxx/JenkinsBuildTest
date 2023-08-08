@@ -1,11 +1,9 @@
 pipeline {
-    agent {
-        jenkins-agent { image 'node:18.17.0-alpine3.18' }
-    }
+    agent { docker { image 'python:3.11.4-alpine3.18' } }
     stages {
-        stage('Test') {
+        stage('build') {
             steps {
-                sh 'node --version'
+                sh 'python --version'
             }
         }
     }
