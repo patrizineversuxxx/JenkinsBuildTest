@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('preparation') {
             steps {
-                sh 'sudo apt-get install python3.6"
+                sh 'sudo apt-get install python3.6'
                 sh 'python --version'
             }
         }
