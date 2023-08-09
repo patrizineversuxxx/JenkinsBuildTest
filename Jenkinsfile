@@ -6,13 +6,32 @@ pipeline {
         } 
     }
     stages {
+        stage('preparation') {
+            steps {
+                script {
+                    def requestsVersion = sh(
+                        script: 'python -c "import requests; print(requests.__version__)"',
+                        returnStdout: true
+                    ).trim()
+
+                    if (requestsVersion) {
+                        echo "Python requests module version: ${requestsVersion}"
+                    } else {
+                        echo "Python requests module not found."
+                    }
+                }
+            }
+        }
         stage('build') {
             steps {
                 sh  '''
                     python -m venv building-env
-                    python -c "import requests; print(requests.__version__)"
                     source building-env/bin/activate
-                    pip install requests
+                    if [ -z "$requestsVersion" ]; then
+                        pip install requests
+                    else
+                        pip install --upgrade requests
+                    fi
                     python --version
                     python main.py
                     '''
