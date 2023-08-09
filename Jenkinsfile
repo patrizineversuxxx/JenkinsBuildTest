@@ -1,18 +1,9 @@
 pipeline {
-    agent {
-        label 'jenkins-agent'
-    }
+    agent { docker { image 'python:3.11.4-alpine3.18' } }
     stages {
-        stage('preparation') {
-            steps {
-                sh 'apt-get update'                
-                sh 'apt-get install python3.6'
-                sh "python --version"
-            }
-        }
         stage('build') {
             steps {
-                echo "Nice job!"
+                sh 'python --version'
             }
         }
     }
