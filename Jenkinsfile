@@ -8,8 +8,12 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'pip install requests'
-                sh 'python --version'
+                sh  '''
+                    python -m venv building-env
+                    source building-env/bin/activate
+                    pip install requests
+                    python --version
+                    '''
                 sh 'python main.py'
             }
         }
