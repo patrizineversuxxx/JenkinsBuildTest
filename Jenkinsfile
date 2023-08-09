@@ -9,15 +9,18 @@ pipeline {
         stage('preparation') {
             steps {
                 script {
-                    def requestsVersion = sh(
-                        script: 'python -c "import requests; print(requests.__version__)"',
-                        returnStdout: true
-                    ).trim()
+                    def requestsVersion
+                    try {
+                        requestsVersion = sh(
+                            script: 'python -c "import requests; print(requests.__version__)"',
+                            returnStdout: true
+                        ).trim()
+                    } catch (Exception e) {
+                        echo "Python requests module not found."
+                    }
 
                     if (requestsVersion) {
                         echo "Python requests module version: ${requestsVersion}"
-                    } else {
-                        echo "Python requests module not found."
                     }
                 }
             }
