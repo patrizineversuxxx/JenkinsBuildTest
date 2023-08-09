@@ -13,8 +13,8 @@ pipeline {
                     source building-env/bin/activate
                     pip install requests
                     python --version
+                    python main.py
                     '''
-                sh 'python main.py'
             }
         }
     }
