@@ -10,6 +10,7 @@ pipeline {
             steps {
                 sh  '''
                     python -m venv building-env
+                    python -c "import requests; print(requests.__version__)"
                     source building-env/bin/activate
                     pip install requests
                     python --version
