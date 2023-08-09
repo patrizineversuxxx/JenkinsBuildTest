@@ -2,7 +2,7 @@ import requests
 
 
 url = "https://www.list.am/ru/"
-request = requests.get(url=url)
-request_code = request.status_code
+response = requests.get(url=url)
+response_code = response.status_code
 
-print(request_code)
+print(response)
